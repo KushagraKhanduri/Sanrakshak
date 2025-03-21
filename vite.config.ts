@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/<repo-name>/", // Add this line
+  base: "/Sanrakshak/", // Add this line
   server: {
     host: "::",
     port: 8080,
