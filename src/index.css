@@ -1,0 +1,209 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Dark mode */
+  .dark-mode {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 90%;
+    
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 0% 98%;
+    --destructive-foreground: 0 0% 0%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 83.9%;
+    
+    --radius: 0.75rem;
+  }
+
+  /* Light mode - with darker text for better visibility */
+  :root, .light-mode {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 0 0% 0%;
+    
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 0 0% 0%;
+    
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 0 0% 0%;
+    
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 0% 0%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    font-family: 'Inter', sans-serif;
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-black/5 border border-gray-200 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)];
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-lg bg-white/90 border border-gray-200 shadow-soft;
+  }
+  
+  /* Dark mode styles */
+  .dark-mode .glass-morphism {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(255,255,255,0.05)];
+  }
+  
+  .dark-mode .glass-dark {
+    @apply backdrop-blur-lg bg-black/30 border border-white/5;
+  }
+  
+  /* Light mode styles */
+  .light-mode .glass-morphism {
+    @apply backdrop-blur-xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+  
+  .light-mode .glass-dark {
+    @apply bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+  
+  .card, .neo-element {
+    @apply border border-gray-200 shadow-soft bg-white;
+  }
+  
+  .dark-mode .card, .dark-mode .neo-element {
+    @apply border border-white/10 bg-black;
+  }
+  
+  .neo-element {
+    @apply rounded-lg p-4 shadow-[0_4px_16px_rgba(0,0,0,0.1)];
+  }
+  
+  .dark-mode .neo-element {
+    @apply shadow-[0_4px_16px_rgba(0,0,0,0.2)];
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .h-screen-dvh {
+    height: 100vh; /* Fallback */
+    height: 100dvh;
+  }
+  
+  .link-hover {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  
+  .dark-mode .focus-ring {
+    @apply focus-visible:ring-white/20;
+  }
+  
+  /* Add shadow for light mode */
+  .shadow-soft {
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.08)];
+  }
+  
+  /* Dark mode specific styles */
+  .dark-mode {
+    @apply bg-black text-white;
+  }
+  
+  .light-mode {
+    @apply bg-white text-black;
+  }
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Component animations */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@for $i from 1 through 10 {
+  .stagger-item:nth-child(#{$i}) {
+    animation: staggerAnimation 0.3s ease-out forwards;
+    animation-delay: calc(#{$i} * 0.05s);
+  }
+}
+
+@keyframes staggerAnimation {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
